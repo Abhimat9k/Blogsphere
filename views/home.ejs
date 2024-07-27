@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Homepage</title>
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-title {
+            font-size: 1.25em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+    
+    <div class="container mt-3 row row-cols-1 row-cols-md-3 g-4">
+        <% blogs.forEach(blog => { %>
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="Cover Image">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= blog.title %></h5>
+                        <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    
+    <%- include("./partials/scripts") %>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">BlogSphere</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <% if (locals.user) { %>
+            <li class="nav-item">                                           
+              <a class="nav-link" href="/blog/add-new">Add Blog</a>                                                 <!-- Nav bar me "add blog" tbhi dikhayenge agr user exist krta hai i.e jab user signed in hai -->
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">                 <!-- Similarly user ka name bhi tbhi show hoga dropdown me jab user logged in i.e signed hoga -->
+                <%= locals.user.fullName %>                                                
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+              </ul>
+            </li>
+          <% } else {%>
+            <li class="nav-item">                                           
+              <a class="nav-link" href="/user/signup">Create Account</a>                                                 <!--  else user agr logged-in nhi hai toh use create Account link dikhao jiska address "signup" hoga -->
+            </li>
+            <li class="nav-item">                                           
+              <a class="nav-link" href="/user/signin">Signin</a>                                                 <!-- Similarly show the option of "signin" too if user is not "signed-in" and then take user to sign-in page -->
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <% if (locals.error) { %>
+   <div class="container mt-4">
+    <div class="alert alert-danger" role="alert">
+      <%= locals.error %>
+    </div>
+   </div>
+  <% } %>

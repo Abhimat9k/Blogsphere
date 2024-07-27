@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <%- include('./partials/head') %>
+    <title>Add New Blog</title>
+    <style>
+      .container {
+          max-width: 800px;
+          margin: auto;
+      }
+      #body {
+          resize: vertical;
+          overflow-wrap: break-word;
+          padding: 7px;
+          font-family: Arial, sans-serif;
+          font-size: 18px;
+      }
+  </style>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+    <div class="container mt-3">
+        <form action="/blog" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="coverImage" class="form-label">Cover Image</label>
+                <input type="file" class="form-control" id="coverImage" name="coverImage" aria-describedby="coverImage">
+              </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="title">
+              </div>
+              <div class="mb-3">
+                <label for="body">Body</label>
+                <textarea name="body" class="form-control"  id="body" wrap="hard" cols="80" rows="20"></textarea>
+              </div>
+              <div class="mb-3">
+                <button class="btn btn-primary">Submit</button>
+              </div>
+        </form>
+    </div>
+    <%- include("./partials/scripts") %>
+</body>
+</html>
