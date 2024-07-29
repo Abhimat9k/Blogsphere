@@ -8,10 +8,13 @@ const router = Router();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.resolve(`./public/uploads/`));
+    const uploadPath = path.join(__dirname, "../public/uploads");
+    console.log(`Uploading to: ${uploadPath}`);
+    cb(null, uploadPath);
   },
   filename: function (req, file, cb) {
     const fileName = `${Date.now()}-${file.originalname}`;
+    console.log(`Filename: ${fileName}`);
     cb(null, fileName);
   },
 });
@@ -39,7 +42,8 @@ router.put("/:id", upload.single("coverImage"), async (req, res) => {
   blog.title = title;
   blog.body = body;
   if (req.file) {
-    blog.coverImageURL = `/uploads/${req.file.filename}`;
+    blog.coverImageURL = `/uploads/${encodeURIComponent(req.file.filename)}`;
+    console.log(`Cover Image URL: ${blog.coverImageURL}`);
   }
   await blog.save();
   res.redirect(`/blog/${blog._id}`);
@@ -74,8 +78,9 @@ router.post("/comment/:blogId", async (req, res) => {
 router.post("/", upload.single("coverImage"), async (req, res) => {
   const { title, body } = req.body;
   const coverImageURL = req.file
-    ? `/uploads/${req.file.filename}`
+    ? `/uploads/${encodeURIComponent(req.file.filename)}`
     : `/do/default-cover.jpg`;
+    console.log(`Cover Image URL for new blog: ${coverImageURL}`);
   const blog = await Blog.create({
     body,
     title,
