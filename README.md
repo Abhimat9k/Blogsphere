@@ -5,4 +5,4 @@ BlogSphere is a full-stack CRUD application for creating, managing, and reading 
 
 # Live Demo
 
-Check out the live version of the application [here](http://your-deployed-url.com).
+Check out the live version of the application [here](https://blogsphere-5y75.onrender.com/).
